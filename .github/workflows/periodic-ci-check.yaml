@@ -34,8 +34,5 @@ jobs:
               issue_number: ${{ steps.cpr.outputs.pull-request-number}},
               owner: "openshift",
               repo: "cluster-samples-operator",
-              body: |
-                /hold
-                
-                This PR is not meant for merging. It merely checks whether the Samples Operator builds with the rest of the Openshift ecosystem."
+              body: "/hold\n\nThis PR is not meant for merging. It merely checks whether the Samples Operator builds with the rest of the Openshift ecosystem."
             })
