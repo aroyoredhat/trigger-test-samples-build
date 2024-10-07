@@ -12,7 +12,8 @@ jobs:
         with:
           repository: openshift/cluster-samples-operator
       - name: run library-sync.sh
-        run: "cd {{ github.workspace }} && ./library-sync.sh"
+        working-directory: "{{ github.workspace }}"
+        run: "./library-sync.sh"
       - name: periodic-ci pull request
         uses: peter-evans/create-pull-request@v7
         with:
