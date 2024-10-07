@@ -23,3 +23,4 @@ jobs:
             Periodic check for library sync compatibility
           token: ${{ secrets.PR_TOKEN }}
           push-to-fork: metlos/cluster-samples-operator
+          draft: true
