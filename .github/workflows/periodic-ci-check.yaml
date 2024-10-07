@@ -16,7 +16,7 @@ jobs:
       - name: periodic-ci pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: periodic-ci
+          branch: master
           delete-branch: true
           title: "Periodic CI check"
           body: |
