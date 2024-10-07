@@ -16,10 +16,11 @@ jobs:
       - name: periodic-ci pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: master
+          branch: periodic-ci
           delete-branch: true
           title: "Periodic CI check"
           body: |
             Periodic check for library sync compatibility
           labels: periodic-ci
           token: ${{ secrets.PR_TOKEN }}
+          push-to-fork: metlos/cluster-samples-operator
