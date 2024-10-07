@@ -14,6 +14,7 @@ jobs:
       - name: run library-sync.sh
         run: "./library-sync.sh"
       - name: periodic-ci pull request
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           branch: periodic-ci
@@ -23,4 +24,13 @@ jobs:
             Periodic check for library sync compatibility
           token: ${{ secrets.PR_TOKEN }}
           push-to-fork: metlos/cluster-samples-operator
-          draft: true
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.PR_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ steps.cpr.outputs.pull-request-number}},
+              owner: "openshift",
+              repo: "cluster-samples-operator",
+              body: "/hold\n\nThis PR is not meant for merging. It merely checks whether the Samples Operator builds with the rest of the Openshift ecosystem."
+            })ator
