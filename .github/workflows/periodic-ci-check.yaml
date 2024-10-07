@@ -22,4 +22,4 @@ jobs:
           body: |
             Periodic check for library sync compatibility
           labels: periodic-ci
-          token: PR_TOKEN
+          token: ${{ secrets.PR_TOKEN }}
