@@ -1,0 +1,24 @@
+name: Periodic CI check
+on:
+  schedule:
+    - cron: "0 0 * * 1" # every Monday at midnight
+jobs:
+  periodic_ci:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          repository: openshift/cluster-samples-operator
+      - name: run library-sync.sh
+        run: "cd {{ github.workspace }} && ./library-sync.sh"
+      - name: periodic-ci pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: periodic-ci
+          delete-branch: true
+          title: "Periodic CI check"
+          body: |
+            Periodic check for library sync compatibility
+          labels: periodic-ci
+          token: PR_TOKEN
