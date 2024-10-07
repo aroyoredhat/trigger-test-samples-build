@@ -2,6 +2,7 @@ name: Periodic CI check
 on:
   schedule:
     - cron: "0 0 * * 1" # every Monday at midnight
+  workflow_dispatch: {} # allow triggering the workflow manually
 jobs:
   periodic_ci:
     runs-on: "ubuntu-latest"
