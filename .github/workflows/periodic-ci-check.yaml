@@ -1,10 +1,10 @@
-name: Periodic CI check
+name: Periodic library sync
 on:
   schedule:
     - cron: "0 0 * * 1" # every Monday at midnight
   workflow_dispatch: {} # allow triggering the workflow manually
 jobs:
-  periodic_ci:
+  ocp-sync:
     runs-on: "ubuntu-latest"
     steps:
       - name: Check out repository
@@ -12,27 +12,41 @@ jobs:
         with:
           repository: openshift/cluster-samples-operator
       - name: run library-sync.sh
-        run: "./library-sync.sh"
+        run: "./library-sync.sh --ocp"
       - name: periodic-ci pull request
         id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: periodic-ci
+          branch: periodic-ocp-sync
           delete-branch: true
-          title: "Periodic CI check"
+          title: "Periodic sync of supported OCP samples"
           body: |
-            Periodic check for library sync compatibility.
+            Syncing the latest supported OCP samples from the library.
 
             Created using https://github.com/metlos/trigger-test-samples-build
           token: ${{ secrets.PR_TOKEN }}
           push-to-fork: metlos/cluster-samples-operator
-      - uses: actions/github-script@v7
+          commit-message: "Automated periodic sync of the supported OCP samples from the openshift library."
+  okd-sync:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          github-token: ${{secrets.PR_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: ${{ steps.cpr.outputs.pull-request-number}},
-              owner: "openshift",
-              repo: "cluster-samples-operator",
-              body: "/hold\n\nThis PR is not meant for merging. It merely checks whether the Samples Operator builds with the rest of the Openshift ecosystem."
-            })
+          repository: openshift/cluster-samples-operator
+      - name: run library-sync.sh
+        run: "./library-sync.sh --okd"
+      - name: periodic-ci pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: periodic-okd-sync
+          delete-branch: true
+          title: "Periodic sync of OKD samples"
+          body: |
+            Syncing the latest samples from the library to OKD.
+
+            Created using https://github.com/metlos/trigger-test-samples-build
+          token: ${{ secrets.PR_TOKEN }}
+          push-to-fork: metlos/cluster-samples-operator
+          commit-message: "Automated periodic sync of OKD samples from the openshift library."
