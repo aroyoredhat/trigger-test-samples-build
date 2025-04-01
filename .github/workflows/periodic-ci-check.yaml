@@ -19,7 +19,7 @@ jobs:
         with:
           branch: periodic-ocp-sync
           delete-branch: true
-          title: "Periodic sync of supported OCP samples"
+          title: "Periodic sync of supported OCP samples 4.19"
           body: |
             Syncing the latest supported OCP samples from the library.
 
@@ -42,7 +42,7 @@ jobs:
         with:
           branch: periodic-okd-sync
           delete-branch: true
-          title: "Periodic sync of OKD samples"
+          title: "Periodic sync of OKD samples 4.19"
           body: |
             Syncing the latest samples from the library to OKD.
 
