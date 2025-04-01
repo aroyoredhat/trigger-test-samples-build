@@ -25,7 +25,7 @@ jobs:
 
             Created using https://github.com/metlos/trigger-test-samples-build
           token: ${{ secrets.PR_TOKEN }}
-          push-to-fork: metlos/cluster-samples-operator
+          push-to-fork: aroyoredhat/cluster-samples-operator
           commit-message: "Automated periodic sync of the supported OCP samples from the openshift library."
   okd-sync:
     runs-on: "ubuntu-latest"
