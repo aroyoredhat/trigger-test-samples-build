@@ -23,7 +23,7 @@ jobs:
           body: |
             Syncing the latest supported OCP samples from the library.
 
-            Created using https://github.com/metlos/trigger-test-samples-build
+            Created using https://github.com/aroyoredhat/trigger-test-samples-build
           token: ${{ secrets.PR_TOKEN }}
           push-to-fork: aroyoredhat/cluster-samples-operator
           commit-message: "Automated periodic sync of the supported OCP samples from the openshift library."
@@ -46,7 +46,7 @@ jobs:
           body: |
             Syncing the latest samples from the library to OKD.
 
-            Created using https://github.com/metlos/trigger-test-samples-build
+            Created using https://github.com/aroyoredhat/trigger-test-samples-build
           token: ${{ secrets.PR_TOKEN }}
           push-to-fork: aroyoredhat/cluster-samples-operator
           commit-message: "Automated periodic sync of OKD samples from the openshift library."
